@@ -5,6 +5,8 @@ import styles from '../styles/Home.module.css'
 import Map from '../components/Map'
 
 export default function Home() {
+  // @TODO uses this default state instead of location based state.
+  // Something about useEffect happening AFTER render??
   const [userLocation, setUserLocation] = useState({
     lng: 5,
     lat: 34,
@@ -23,7 +25,7 @@ export default function Home() {
         (error) => console.error(error)
       )
     }
-  }, [])
+  }, [userLocation])
 
   return (
     <div className={styles.container}>
