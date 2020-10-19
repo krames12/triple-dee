@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 
-const Map = () => {
+const Map = ({ userLocation }) => {
     const [mapState, setMapState] = useState({
-        lng: 5,
-        lat: 34,
+        lng: userLocation.lng,
+        lat: userLocation.lat,
         zoom: 2
     });
     mapboxgl.accessToken = process.env.mapboxSecret;
-
     useEffect(() => {
-        new mapboxgl.Map({
+        const map = new mapboxgl.Map({
             'container': 'map-container',
             'style': 'mapbox://styles/mapbox/streets-v11',
             'center': [mapState.lng, mapState.lat],

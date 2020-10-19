@@ -1,9 +1,30 @@
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 import Map from '../components/Map'
 
 export default function Home() {
+  const [userLocation, setUserLocation] = useState({
+    lng: 5,
+    lat: 34,
+  })
+
+  useEffect(() => {
+    // Geolocation Setup
+    if( 'geolocation' in window.navigator) {
+      navigator.geolocation.getCurrentPosition(
+        // Success
+        ({coords}) => {
+          setUserLocation({lng: coords.longitude, lat: coords.latitude})
+        },
+
+        // Error
+        (error) => console.error(error)
+      )
+    }
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,7 +34,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Map />
+        <Map userLocation={userLocation} />
       </main>
 
       <footer className={styles.footer}>
