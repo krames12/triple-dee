@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
+import styles from "../styles/Map.module.css"
 
 const Map = ({ userLocation }) => {
   const [lng, setLng] = useState(userLocation.lng);
@@ -31,10 +32,9 @@ const Map = ({ userLocation }) => {
     });
 
     mapbox.on('move', () => {
-      console.log('moving the map');
-      setLng(map.getCenter().lng.toFixed(4))
-      setLat(map.getCenter().lat.toFixed(4))
-      setZoom(map.getZoom().toFixed(2))
+      setLng(mapbox.getCenter().lng.toFixed(4))
+      setLat(mapbox.getCenter().lat.toFixed(4))
+      setZoom(mapbox.getZoom().toFixed(2))
     })
   }, []);
 
@@ -43,7 +43,7 @@ const Map = ({ userLocation }) => {
   //   mapbox.jumpTo({ "center": [lng, lat] })
   // }, [lng, lat, zoom])
 
-  return <div id="map-container" style={{height: '80vh', width: '80vw',}} />
+  return <div id="map-container" className={styles["map-container"]} />
 };
 
 export default Map;
