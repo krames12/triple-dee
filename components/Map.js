@@ -2,28 +2,24 @@ import { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 
 const Map = ({ userLocation }) => {
-  const [mapState, setMapState] = useState({
-    lng: userLocation.lng,
-    lat: userLocation.lat,
-    zoom: 12
-  });
+  const [lng, setLng] = useState(userLocation.lng);
+  const [lat, setLat] = useState(userLocation.lat);
+  const [zoom, setZoom] = useState(11);
   mapboxgl.accessToken = process.env.mapboxSecret;
-  
+
   useEffect(() => {
     const map = new mapboxgl.Map({
       'container': 'map-container',
       'style': 'mapbox://styles/mapbox/streets-v11',
-      'center': [mapState.lng, mapState.lat],
-      'zoom': mapState.zoom
+      'center': [lng, lat],
+      'zoom': zoom
     });
 
     map.on('move', () => {
       console.log('moving the map');
-      setMapState({
-        lng: map.getCenter().lng.toFixed(4),
-        lat: map.getCenter().lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
-      })
+      setLng(map.getCenter().lng.toFixed(4))
+      setLat(map.getCenter().lat.toFixed(4))
+      setZoom(map.getZoom().toFixed(2))
     })
   }, []);
 

@@ -8,8 +8,8 @@ export default function Home() {
   // @TODO uses this default state instead of location based state.
   // Something about useEffect happening AFTER render??
   const [userLocation, setUserLocation] = useState({
-    lng: 5,
-    lat: 34,
+    lng: -83.0671,
+    lat: 42.3529,
   })
 
   useEffect(() => {
