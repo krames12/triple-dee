@@ -12,21 +12,6 @@ export default function Home() {
     lat: 42.3529,
   })
 
-  useEffect(() => {
-    // Geolocation Setup
-    if( 'geolocation' in window.navigator) {
-      navigator.geolocation.getCurrentPosition(
-        // Success
-        ({coords}) => {
-          setUserLocation({lng: coords.longitude, lat: coords.latitude})
-        },
-
-        // Error
-        (error) => console.error(error)
-      )
-    }
-  }, [userLocation])
-
   return (
     <div className={styles.container}>
       <Head>
