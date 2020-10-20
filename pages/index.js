@@ -3,6 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 import Map from '../components/Map'
+import RestaurantList from '../components/RestaurantList'
 
 export default function Home() {
   // @TODO uses this default state instead of location based state.
@@ -22,18 +23,8 @@ export default function Home() {
 
       <main className={styles.main}>
         <Map userLocation={userLocation} />
+        <RestaurantList />
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }

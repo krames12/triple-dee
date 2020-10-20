@@ -1,0 +1,24 @@
+.restaurant-list {
+  padding: 0.5rem;
+  width: 40vw;
+  overflow-y: scroll
+}
+
+.restaurant-list .list {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.restaurant-list .item {
+  border-top: 1px solid gray;
+  padding: 5px;
+}
+
+.restaurant-list .item .title {
+  margin: 0.5rem 0
+}
+
+.restaurant-list .item .location {
+  margin: 0.25rem 0;
+  color: rgb(143, 143, 143);
+}
