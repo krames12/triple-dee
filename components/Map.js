@@ -14,6 +14,11 @@ const Map = ({ userLocation }) => {
       navigator.geolocation.getCurrentPosition(
         // Success
         ({coords}) => {
+          // Attempt at fixing the restriction of needing to be in a useEffect
+          // to access anything on the window, i.e. navigation, to set the user's
+          // location as a default
+          mapbox.jumpTo({ "center": [coords.longitude, coords.latitude] })
+          
           setLng(coords.longitude)
           setLat(coords.latitude)
         },
