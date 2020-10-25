@@ -1,9 +1,8 @@
 const axios = require("axios");
 
 async function getPlacesNearMe (url) {
-  console.log("inside getPlaces");
-  await axios.get(url)
-  .then( response => response.data )
+  return await axios.get(url)
+  .then( ({data}) => data )
   .catch( error => error)
 }
 
