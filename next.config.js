@@ -1,5 +1,10 @@
+const ENV_VARS = {
+    MAPBOX_SECRET: process.env.MAPBOX_SECRET,
+    GOOGLE_PLACES: process.env.GOOGLE_KEY,
+}
+
 module.exports = {
     env: {
-        mapboxSecret: "pk.eyJ1Ijoia3JhbWVzMTIiLCJhIjoiY2tnYXFqejJuMDlxNDJxcnlpOWdxam1yMyJ9.VZpODQOAjyLNreXsiIAR0w"
-    } 
+        ...ENV_VARS,
+    }
 }

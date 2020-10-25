@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import useSWR from 'swr';
 import mapboxgl from 'mapbox-gl';
 import styles from "../styles/Map.module.css"
 
@@ -6,7 +8,7 @@ const Map = ({ userLocation }) => {
   const [lng, setLng] = useState(userLocation.lng);
   const [lat, setLat] = useState(userLocation.lat);
   const [zoom, setZoom] = useState(11);
-  mapboxgl.accessToken = process.env.mapboxSecret;
+  mapboxgl.accessToken = process.env.MAPBOX_SECRET;
 
   useEffect(() => {
     // Geolocation Setup
@@ -18,7 +20,7 @@ const Map = ({ userLocation }) => {
           // to access anything on the window, i.e. navigation, to set the user's
           // location as a default
           mapbox.jumpTo({ "center": [coords.longitude, coords.latitude] })
-          
+
           setLng(coords.longitude)
           setLat(coords.latitude)
         },
@@ -43,10 +45,22 @@ const Map = ({ userLocation }) => {
     })
   }, []);
 
-  // Figure out how the hell to get this to work
-  // useEffect(() => {
-  //   mapbox.jumpTo({ "center": [lng, lat] })
-  // }, [lng, lat, zoom])
+  // async function fetcher(path) {
+  //   axios.get(path)
+  //     .then( response => {
+  //       console.log("axios response", response)
+  //       return response.data;
+  //     })
+  //     .catch( error => {
+  //       console.error(error)
+  //     })
+  // }
+
+  // const placesKey = process.env.googlePlaces;
+  // const placesUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lng},${lat}&radius=1500&type=restaurant&key=${placesKey}`
+  
+  // const { data, error } = useSWR(placesUrl, fetcher)
+  // error ? console.error(error) : console.log('ata',data);
 
   return <div id="map-container" className={styles["map-container"]} />
 };
