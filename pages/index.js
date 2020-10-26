@@ -15,10 +15,17 @@ export default function Home() {
   })
   const [restaurants, setRestaurants] = useState([])
 
-  useEffect(() => {
+  const updateRestaurantList = () => {
     axios.get(`/api/places?lng=${locationData.lng}&lat=${locationData.lat}`)
-      .then()
-  }, [restaurants])
+      .then( ({data}) => {
+        setRestaurants(data);
+      })
+      .catch( error => console.error(error))
+  }
+
+  useEffect(() => {
+    updateRestaurantList();
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -29,7 +36,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <RestaurantsContext.Provider values={{locationData}}>
+        <RestaurantsContext.Provider values={{locationData, restaurants}}>
           <Map userLocation={locationData} updateLocation={setLocationData} />
           <RestaurantList restaurants={restaurants} />
         </RestaurantsContext.Provider>
