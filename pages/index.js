@@ -13,10 +13,11 @@ export default function Home() {
     lng: -83.0671,
     lat: 42.3529,
   })
-  const [restaurants, setRestaurants] = useState(["bill's tavern"])
+  const [restaurants, setRestaurants] = useState([])
 
   useEffect(() => {
-
+    axios.get(`/api/places?lng=${locationData.lng}&lat=${locationData.lat}`)
+      .then()
   }, [restaurants])
 
   return (
