@@ -14,8 +14,21 @@ module.exports = async (request, response) => {
 
   try {
     const placesRequest = await getPlacesNearMe(placesUrl);
-    await console.log(placesRequest)
-    response.status(200).json(placesRequest.results)
+
+    // Format data to my liking
+    const restaurantData = placesRequest.results.map( restaurant => {
+      return {
+        name: restaurant.name,
+        address: restaurant.vicinity,
+        location: {
+          lng: restaurant.geometry.location.lng,
+          lat: restaurant.geometry.location.lat,
+        },
+        placeId: restaurant.placeId,
+      }
+    })
+
+    response.status(200).json(restaurantData)
   } catch(error) {
     response.status(400).json(error)
   }
