@@ -12,11 +12,12 @@ export default function Home() {
   const [locationData, setLocationData] = useState({
     lng: -83.0671,
     lat: 42.3529,
+    zoom: 12
   })
   const [restaurants, setRestaurants] = useState([])
 
   const updateRestaurantList = async () => {
-    await axios.get(`/api/places?lng=${locationData.lng}&lat=${locationData.lat}`)
+    await axios.get(`/api/places?lng=${locationData.lng}&lat=${locationData.lat}&zoom=${locationData.zoom}`)
       .then( ({data}) => {
         setRestaurants(data);
       })

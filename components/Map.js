@@ -4,7 +4,6 @@ import styles from "../styles/Map.module.css"
 
 const Map = ({ userLocation, locationUpdateHandler, restaurantLocations }) => {
   const mapContainerRef = useRef(null);
-  const [zoom, setZoom] = useState(12);
   const [mapObject, setMapObject] = useState(null)
   const [mapMarkers, setMapMarkers] = useState([]);
 
@@ -22,6 +21,7 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations }) => {
           mapbox.jumpTo({ "center": [coords.longitude, coords.latitude] })
 
           locationUpdateHandler({
+            ...userLocation,
             lng: coords.longitude,
             lat: coords.latitude,
           })
@@ -37,15 +37,17 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations }) => {
       'container': mapContainerRef.current,
       'style': 'mapbox://styles/mapbox/streets-v11',
       'center': [userLocation.lng, userLocation.lat],
-      'zoom': zoom
+      'zoom': userLocation.zoom
     })
+
+    console.log(mapbox.getBounds())
 
     mapbox.on('move', () => {
       locationUpdateHandler({
-        lng: mapbox.getCenter().lng.toFixed(4),
-        lat: mapbox.getCenter().lat.toFixed(4),
+        lng: mapbox.getCenter().lng.toFixed(6),
+        lat: mapbox.getCenter().lat.toFixed(6),
+        zoom: mapbox.getZoom().toFixed(3)
       })
-      setZoom(mapbox.getZoom().toFixed(2))
     })
 
     mapbox.on('load', () => setMapObject(mapbox))
