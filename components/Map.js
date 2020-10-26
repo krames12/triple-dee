@@ -57,8 +57,8 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations }) => {
     clearAllMarkers();
     if(restaurantLocations.length > 0) {
       const newMarkers = [];
-      restaurantLocations.forEach( ({location}) => {
-        const marker = createMapMarker(location)
+      restaurantLocations.forEach( ({location, name}) => {
+        const marker = createMapMarker(location, name)
         newMarkers.push(marker);
       })
 
@@ -66,9 +66,15 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations }) => {
     }
   }, [restaurantLocations, mapObject])
 
-  const createMapMarker = ({lng, lat}) => {
+  const createMapMarker = ({lng, lat}, name) => {
     if(mapObject) {
-      return new mapboxgl.Marker().setLngLat([lng, lat]).addTo(mapObject);
+      return new mapboxgl.Marker()
+        .setLngLat([lng, lat])
+        .setPopup(
+          new mapboxgl.Popup()
+          .setHTML(`<h3>${name}</h3>`)
+        )
+        .addTo(mapObject);
     }
     else {
       return
