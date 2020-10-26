@@ -15,7 +15,7 @@ module.exports = async (request, response) => {
   try {
     const placesRequest = await getPlacesNearMe(placesUrl);
     await console.log(placesRequest)
-    response.status(200).json(placesRequest)
+    response.status(200).json(placesRequest.results)
   } catch(error) {
     response.status(400).json(error)
   }
