@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import useSWR from 'swr';
 import mapboxgl from 'mapbox-gl';
 import styles from "../styles/Map.module.css"
 
-const Map = ({ userLocation }) => {
-  const [lng, setLng] = useState(userLocation.lng);
-  const [lat, setLat] = useState(userLocation.lat);
+const Map = ({ userLocation, updateLocation }) => {
   const [zoom, setZoom] = useState(11);
   mapboxgl.accessToken = process.env.MAPBOX_SECRET;
 
@@ -21,8 +17,10 @@ const Map = ({ userLocation }) => {
           // location as a default
           mapbox.jumpTo({ "center": [coords.longitude, coords.latitude] })
 
-          setLng(coords.longitude)
-          setLat(coords.latitude)
+          updateLocation({
+            lng: coords.longitude,
+            lat: coords.latitude,
+          })
         },
 
         // Error
@@ -34,33 +32,18 @@ const Map = ({ userLocation }) => {
     const mapbox = new mapboxgl.Map({
       'container': "map-container",
       'style': 'mapbox://styles/mapbox/streets-v11',
-      'center': [lng, lat],
+      'center': [userLocation.lng, userLocation.lat],
       'zoom': zoom
     });
 
     mapbox.on('move', () => {
-      setLng(mapbox.getCenter().lng.toFixed(4))
-      setLat(mapbox.getCenter().lat.toFixed(4))
+      updateLocation({
+        lng: mapbox.getCenter().lng.toFixed(4),
+        lat: mapbox.getCenter().lat.toFixed(4),
+      })
       setZoom(mapbox.getZoom().toFixed(2))
     })
   }, []);
-
-  // async function fetcher(path) {
-  //   axios.get(path)
-  //     .then( response => {
-  //       console.log("axios response", response)
-  //       return response.data;
-  //     })
-  //     .catch( error => {
-  //       console.error(error)
-  //     })
-  // }
-
-  // const placesKey = process.env.googlePlaces;
-  // const placesUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lng},${lat}&radius=1500&type=restaurant&key=${placesKey}`
-  
-  // const { data, error } = useSWR(placesUrl, fetcher)
-  // error ? console.error(error) : console.log('ata',data);
 
   return <div id="map-container" className={styles["map-container"]} />
 };

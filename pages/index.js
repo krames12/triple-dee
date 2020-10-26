@@ -1,17 +1,23 @@
-import { useState, useEffect } from 'react'
+import {useState, useEffect} from 'react'
+import * as axios from 'axios';
+
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 import Map from '../components/Map'
 import RestaurantList from '../components/RestaurantList'
+import RestaurantsContext from "../components/RestaurantsContext"
 
 export default function Home() {
-  // @TODO uses this default state instead of location based state.
-  // Something about useEffect happening AFTER render??
-  const [userLocation, setUserLocation] = useState({
+  const [locationData, setLocationData] = useState({
     lng: -83.0671,
     lat: 42.3529,
   })
+  const [restaurants, setRestaurants] = useState(["bill's tavern"])
+
+  useEffect(() => {
+
+  }, [restaurants])
 
   return (
     <div className={styles.container}>
@@ -22,8 +28,10 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Map userLocation={userLocation} />
-        <RestaurantList />
+        <RestaurantsContext.Provider values={{locationData}}>
+          <Map userLocation={locationData} updateLocation={setLocationData} />
+          <RestaurantList restaurants={restaurants} />
+        </RestaurantsContext.Provider>
       </main>
     </div>
   )
