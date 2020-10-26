@@ -1,11 +1,11 @@
 import styles from "../styles/RestaurantList.module.css"
 
-const RestaurantList = () => {
+const RestaurantList = ({restaurants}) => {
   return (
     <div className={styles["restaurant-list"]} >
       <h2>Restaurant List</h2>
       <ul className={styles.list}>
-        {["Bill's Tavern", "Tap Houz", "Bubba Gump Shrimp"].map(
+        {restaurants.length && restaurants.map(
           (name, index) => (
             <li 
               className={styles.item}
