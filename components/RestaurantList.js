@@ -13,7 +13,6 @@ const RestaurantList = ({restaurants}) => {
             >
               <h3 className={styles.title}>{name}</h3>
               <p className={styles.location}>{address}</p>
-              <p className={styles.description}>Bacon ipsum dolor amet meatloaf beef excepteur, porchetta est veniam corned beef shoulder turducken tongue nisi. Deserunt bacon velit shankle turducken, shoulder laboris. Excepteur officia boudin tail elit tenderloin, enim anim labore doner jowl laboris.</p>
             </li>
           )
         )}

@@ -23,8 +23,12 @@ export default function Home() {
       .catch( error => console.error(error))
   }
 
+  const handleSearchAreaClick = () => {
+    updateRestaurantList()
+  }
+
   useEffect(() => {
-    updateRestaurantList();
+    updateRestaurantList()
   }, [])
 
   return (
@@ -36,9 +40,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <button className={styles["search-area-button"]} onClick={() => handleSearchAreaClick()}>Refresh List</button>
         <RestaurantsContext.Provider values={{locationData, restaurants}}>
-          <Map userLocation={locationData} updateLocation={setLocationData} />
-          <RestaurantList restaurants={restaurants} />
+          <div className={styles["app-container"]}>
+            <Map userLocation={locationData} updateLocation={setLocationData} />
+            <RestaurantList restaurants={restaurants} />
+          </div>
         </RestaurantsContext.Provider>
       </main>
     </div>

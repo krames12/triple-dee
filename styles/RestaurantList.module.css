@@ -1,17 +1,18 @@
 .restaurant-list {
   padding: 0.5rem;
   width: 40vw;
-  overflow-y: scroll
 }
 
 .restaurant-list .list {
   list-style: none;
   padding-inline-start: 0;
+  max-height: 90vh;
+  overflow-y: scroll
 }
 
 .restaurant-list .item {
   border-top: 1px solid gray;
-  padding: 5px;
+  padding: 1rem 0.5rem;
 }
 
 .restaurant-list .item .title {
