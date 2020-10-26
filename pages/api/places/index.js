@@ -10,7 +10,7 @@ module.exports = async (request, response) => {
   const {lng, lat} = request.query;
 
   const placesKey = process.env.GOOGLE_PLACES;
-  const placesUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=15000&type=restaurant&key=${placesKey}`
+  const placesUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=10000&type=restaurant&key=${placesKey}`
 
   try {
     const placesRequest = await getPlacesNearMe(placesUrl);

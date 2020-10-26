@@ -15,8 +15,8 @@ export default function Home() {
   })
   const [restaurants, setRestaurants] = useState([])
 
-  const updateRestaurantList = () => {
-    axios.get(`/api/places?lng=${locationData.lng}&lat=${locationData.lat}`)
+  const updateRestaurantList = async () => {
+    await axios.get(`/api/places?lng=${locationData.lng}&lat=${locationData.lat}`)
       .then( ({data}) => {
         setRestaurants(data);
       })
@@ -43,7 +43,11 @@ export default function Home() {
         <button className={styles["search-area-button"]} onClick={() => handleSearchAreaClick()}>Refresh List</button>
         <RestaurantsContext.Provider values={{locationData, restaurants}}>
           <div className={styles["app-container"]}>
-            <Map userLocation={locationData} updateLocation={setLocationData} />
+            <Map 
+              userLocation={locationData} 
+              locationUpdateHandler={setLocationData} 
+              restaurantLocations={restaurants}
+            />
             <RestaurantList restaurants={restaurants} />
           </div>
         </RestaurantsContext.Provider>

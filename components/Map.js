@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import styles from "../styles/Map.module.css"
 
-const Map = ({ userLocation, updateLocation }) => {
-  const [zoom, setZoom] = useState(11);
+const Map = ({ userLocation, locationUpdateHandler, restaurantLocations }) => {
+  const mapContainerRef = useRef(null);
+  const [zoom, setZoom] = useState(12);
+  const [mapObject, setMapObject] = useState(null)
+  const [mapMarkers, setMapMarkers] = useState([]);
+
   mapboxgl.accessToken = process.env.MAPBOX_SECRET;
 
   useEffect(() => {
@@ -17,7 +21,7 @@ const Map = ({ userLocation, updateLocation }) => {
           // location as a default
           mapbox.jumpTo({ "center": [coords.longitude, coords.latitude] })
 
-          updateLocation({
+          locationUpdateHandler({
             lng: coords.longitude,
             lat: coords.latitude,
           })
@@ -30,22 +34,53 @@ const Map = ({ userLocation, updateLocation }) => {
     }
     
     const mapbox = new mapboxgl.Map({
-      'container': "map-container",
+      'container': mapContainerRef.current,
       'style': 'mapbox://styles/mapbox/streets-v11',
       'center': [userLocation.lng, userLocation.lat],
       'zoom': zoom
-    });
+    })
 
     mapbox.on('move', () => {
-      updateLocation({
+      locationUpdateHandler({
         lng: mapbox.getCenter().lng.toFixed(4),
         lat: mapbox.getCenter().lat.toFixed(4),
       })
       setZoom(mapbox.getZoom().toFixed(2))
     })
-  }, []);
 
-  return <div id="map-container" className={styles["map-container"]} />
+    mapbox.on('load', () => setMapObject(mapbox))
+
+    return () => mapbox.remove()
+  }, [])
+
+  useEffect(() => {
+    clearAllMarkers();
+    if(restaurantLocations.length > 0) {
+      const newMarkers = [];
+      restaurantLocations.forEach( ({location}) => {
+        const marker = createMapMarker(location)
+        newMarkers.push(marker);
+      })
+
+      setMapMarkers(newMarkers);
+    }
+  }, [restaurantLocations, mapObject])
+
+  const createMapMarker = ({lng, lat}) => {
+    if(mapObject) {
+      return new mapboxgl.Marker().setLngLat([lng, lat]).addTo(mapObject);
+    }
+    else {
+      return
+    }
+  }
+
+  const clearAllMarkers = () => {
+    mapMarkers.forEach( marker => marker && marker.remove())
+    setMapMarkers([])
+  }
+
+  return <div ref={mapContainerRef} className={styles["map-container"]} />
 };
 
 export default Map;
