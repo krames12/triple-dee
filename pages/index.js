@@ -16,8 +16,8 @@ export default function Home() {
   })
   const [restaurants, setRestaurants] = useState([])
 
-  const updateRestaurantList = async () => {
-    await axios.get(`/api/places?lng=${locationData.lng}&lat=${locationData.lat}&zoom=${locationData.zoom}`)
+  const updateRestaurantList = async (lng, lat) => {
+    await axios.get(`/api/places?lng=${lng}&lat=${locationData.lat}&zoom=${locationData.zoom}`)
       .then( ({data}) => {
         setRestaurants(data);
       })
@@ -25,12 +25,8 @@ export default function Home() {
   }
 
   const handleSearchAreaClick = () => {
-    updateRestaurantList()
+    updateRestaurantList(locationData.lng, locationData.lat)
   }
-
-  useEffect(() => {
-    updateRestaurantList()
-  }, [])
 
   return (
     <div className={styles.container}>
@@ -48,6 +44,7 @@ export default function Home() {
               userLocation={locationData} 
               locationUpdateHandler={setLocationData} 
               restaurantLocations={restaurants}
+              updateRestaurantListHander={updateRestaurantList}
             />
             <RestaurantList restaurants={restaurants} />
           </div>

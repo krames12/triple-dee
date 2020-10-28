@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import styles from "../styles/Map.module.css"
 
-const Map = ({ userLocation, locationUpdateHandler, restaurantLocations }) => {
+const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateRestaurantListHander }) => {
   const mapContainerRef = useRef(null);
   const [mapObject, setMapObject] = useState(null)
   const [mapMarkers, setMapMarkers] = useState([]);
@@ -25,12 +25,16 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations }) => {
             lng: coords.longitude,
             lat: coords.latitude,
           })
+
+          updateRestaurantListHander(coords.longitude, coords.latitude)
         },
 
         // Error
         (error) => console.error(error)
       )
 
+    } else {
+      updateRestaurantListHander(userLocation.lng, userLocation.lat)
     }
     
     const mapbox = new mapboxgl.Map({

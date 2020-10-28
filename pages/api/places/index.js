@@ -8,7 +8,9 @@ async function getPlacesNearMe (url) {
 
 module.exports = async (request, response) => {
   const {lng, lat, zoom} = request.query;
-  const searchRadius = zoom * 583.333;
+
+  // @TODO Figure out how to calculate the radius based on zoom level
+  // const searchRadius = zoom * 583.333;
 
   const placesKey = process.env.GOOGLE_PLACES;
   const placesUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=7000&type=restaurant&key=${placesKey}`
