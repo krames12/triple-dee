@@ -1,4 +1,6 @@
-import styles from "./RestaurantList.module.scss"
+import styles from "./RestaurantList.module.css"
+
+import StarRatings from '../StarRatings/index'
 
 const RestaurantList = ({restaurants}) => {
   return (
@@ -6,13 +8,14 @@ const RestaurantList = ({restaurants}) => {
       <h2>Restaurant List</h2>
       <ul className={styles.list}>
         {restaurants.length && restaurants.map(
-          ({name, address}, index) => (
+          ({name, address, rating, placeId}, index) => (
             <li 
               className="bg-gray-200"
-              key={index}
+              key={placeId}
             >
               <h3 className={styles.title}>{name}</h3>
               <p className={styles.location}>{address}</p>
+              <StarRatings key={`${placeId}-${rating}`} rating={rating} />
             </li>
           )
         )}

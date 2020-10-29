@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
-import styles from "./Map.module.scss"
+import styles from "./Map.module.css"
 
 const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateRestaurantListHander }) => {
   const mapContainerRef = useRef(null);

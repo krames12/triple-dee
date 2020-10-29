@@ -4,8 +4,8 @@ import * as axios from 'axios';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-import Map from '../components/Map'
-import RestaurantList from '../components/RestaurantList'
+import Map from '../components/Map/index'
+import RestaurantList from '../components/RestaurantList/index'
 import RestaurantsContext from "../components/RestaurantsContext"
 
 export default function Home() {
@@ -37,7 +37,16 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <button className="p-2 bg-teal-700 text-gray-200" onClick={() => handleSearchAreaClick()}>Refresh List</button>
+        <button 
+          className="
+            p-2 rounded
+            bg-purple-600 text-white hover:bg-purple-800
+            transition-all duration-200 ease-in-out
+          " 
+          onClick={() => handleSearchAreaClick()}
+        >
+          Refresh List
+        </button>
         <RestaurantsContext.Provider values={{locationData, restaurants}}>
           <div className={styles["app-container"]}>
             <Map 
