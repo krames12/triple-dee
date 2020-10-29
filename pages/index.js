@@ -37,7 +37,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <button className={styles["search-area-button"]} onClick={() => handleSearchAreaClick()}>Refresh List</button>
+        <button className="p-2 bg-teal-700 text-gray-200" onClick={() => handleSearchAreaClick()}>Refresh List</button>
         <RestaurantsContext.Provider values={{locationData, restaurants}}>
           <div className={styles["app-container"]}>
             <Map 
