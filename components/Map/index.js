@@ -44,8 +44,6 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateR
       'zoom': userLocation.zoom
     })
 
-    console.log(mapbox.getBounds())
-
     mapbox.on('move', () => {
       locationUpdateHandler({
         lng: mapbox.getCenter().lng.toFixed(6),
