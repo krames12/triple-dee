@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
-import styles from "./Map.module.css"
 
 const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateRestaurantListHander }) => {
   const mapContainerRef = useRef(null);
@@ -90,7 +89,22 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateR
     setMapMarkers([])
   }
 
-  return <div ref={mapContainerRef} className={styles["map-container"]} />
+  return (
+    <div className="relative h-full w-3/5">
+      <div ref={mapContainerRef} className={`h-full w-full rounded-3xl`} />
+      <button 
+          className="
+            absolute bottom-0 left-auto right-auto
+            p-2 rounded z-10
+            bg-purple-600 text-white hover:bg-purple-800
+            transition-all duration-200 ease-in-out
+          " 
+          onClick={() => updateRestaurantListHander(userLocation.lng, userLocation.lat)}
+        >
+          Refresh List
+        </button>
+    </div>
+  )
 };
 
 export default Map;

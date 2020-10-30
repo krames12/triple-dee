@@ -24,10 +24,6 @@ export default function Home() {
       .catch( error => console.error(error))
   }
 
-  const handleSearchAreaClick = () => {
-    updateRestaurantList(locationData.lng, locationData.lat)
-  }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -37,16 +33,6 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <button 
-          className="
-            p-2 rounded
-            bg-purple-600 text-white hover:bg-purple-800
-            transition-all duration-200 ease-in-out
-          " 
-          onClick={() => handleSearchAreaClick()}
-        >
-          Refresh List
-        </button>
         <RestaurantsContext.Provider values={{locationData, restaurants}}>
           <div className={styles["app-container"]}>
             <Map 

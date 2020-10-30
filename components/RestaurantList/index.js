@@ -1,20 +1,19 @@
-import styles from "./RestaurantList.module.css"
-
 import StarRatings from '../StarRatings/index'
 
 const RestaurantList = ({restaurants}) => {
   return (
-    <div className={styles["restaurant-list"]} >
-      <h2>Restaurant List</h2>
-      <ul className={styles.list}>
+    <div className="h-full w-2/5" >
+      <ul className="overflow-y-scroll max-h-full">
         {restaurants.length && restaurants.map(
-          ({name, address, rating, placeId}, index) => (
+          ({name, rating, placeId}) => (
             <li 
-              className="bg-gray-200"
+              className="
+                py-3 px-5 m-4 max-w-full 
+                bg-teal-200 rounded-2xl
+              "
               key={placeId}
             >
-              <h3 className={styles.title}>{name}</h3>
-              <p className={styles.location}>{address}</p>
+              <h3 className="text-left">{name}</h3>
               <StarRatings key={`${placeId}-${rating}`} rating={rating} />
             </li>
           )
