@@ -3,7 +3,7 @@ import StarRatings from '../StarRatings/index'
 const RestaurantList = ({restaurants}) => {
   return (
     <div className="
-      w-full h-32 absolute bottom-0 mb-24 
+      w-full h-32 absolute bottom-0 mb-4
       md:h-full md:w-2/5 md:relative md:mb-0
     ">
       <ul className="
