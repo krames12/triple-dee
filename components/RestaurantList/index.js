@@ -14,12 +14,12 @@ const RestaurantList = ({restaurants}) => {
           ({name, rating, placeId}) => (
             <li 
               className="
-                py-3 px-5 m-4 max-w-full
+                py-3 px-5 m-2 w-auto
                 bg-white rounded-2xl
               "
               key={placeId}
             >
-              <p className="text-left">{name}</p>
+              <p className="text-left whitespace-no-wrap md:whitespace-normal">{name}</p>
               <StarRatings key={`${placeId}-${rating}`} rating={rating} />
             </li>
           )
