@@ -28,7 +28,8 @@ module.exports = async (request, response) => {
           lat: restaurant.geometry.location.lat,
         },
         placeId: restaurant.place_id,
-        rating: restaurant.rating
+        rating: restaurant.rating,
+        tags: restaurant.types
       }
     })
 

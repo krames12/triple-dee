@@ -17,7 +17,7 @@ export default function Home() {
   const [restaurants, setRestaurants] = useState([])
 
   const updateRestaurantList = async (lng, lat) => {
-    await axios.get(`/api/places?lng=${lng}&lat=${locationData.lat}&zoom=${locationData.zoom}`)
+    await axios.get(`/api/places?lng=${lng}&lat=${lat}&zoom=${locationData.zoom}`)
       .then( ({data}) => {
         setRestaurants(data);
       })
@@ -25,14 +25,14 @@ export default function Home() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} h-screen bg-purple-100`}>
       <Head>
         <title>Triple Dee</title>
         <link rel="icon" href="/favicon.ico" />
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
       </Head>
 
-      <main className={styles.main}>
+      <main className={`${styles.main}`}>
         <RestaurantsContext.Provider values={{locationData, restaurants}}>
           <div className={styles["app-container"]}>
             <Map 

@@ -90,11 +90,16 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateR
   }
 
   return (
-    <div className="relative h-full w-3/5">
+    <div className="
+        relative 
+        h-full w-full
+        md:w-3/5
+      "
+    >
       <div ref={mapContainerRef} className={`h-full w-full rounded-3xl`} />
       <button 
           className="
-            absolute bottom-0 left-auto right-auto
+            absolute top-0 left-auto right-auto
             p-2 rounded z-10
             bg-purple-600 text-white hover:bg-purple-800
             transition-all duration-200 ease-in-out
