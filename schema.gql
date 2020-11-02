@@ -1,0 +1,32 @@
+# Restaurant -> Season / Episode / Name / Location
+
+# What should a restaurant look like?
+# Restaurant {
+#   name: "Bilbos Tavern",
+#   location: [ 123.123123, -82.1231231 ],
+#   description: "Bacon Ipsum salty grease fat pork steak",
+#   episode: {
+#     number: 11,
+#     season: 3
+#     name: "Classics"
+#   }
+# }
+
+type Restauraunt {
+  name: String!
+  location: [Float!] # [lng, lat]
+  description: String
+  episode: Episode!
+}
+
+type Episode {
+  title: String!
+  number: Number!
+  season: Number!
+  restaurants: [Restauraunt!]
+}
+
+type Query {
+  allRestaurants: [Restaurant!],
+  allEpisodes: [Episode!]
+}
