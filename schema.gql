@@ -16,17 +16,9 @@ type Restaurant {
   name: String!
   location: [Float!] # [lng, lat]
   description: String
-  episode: Episode!
-}
-
-type Episode {
-  title: String!
-  number: Int!
   season: Int!
-  restaurants: [Restaurant!]
 }
 
 type Query {
   allRestaurants: [Restaurant!],
-  allEpisodes: [Episode!]
 }
