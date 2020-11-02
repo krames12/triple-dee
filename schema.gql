@@ -21,8 +21,8 @@ type Restaurant {
 
 type Episode {
   title: String!
-  number: Number!
-  season: Number!
+  number: Int!
+  season: Int!
   restaurants: [Restaurant!]
 }
 
