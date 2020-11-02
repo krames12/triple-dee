@@ -1,3 +1,14 @@
+# Triple Dee
+This project is intended to be a map of all of the restaurants featured in Diners, Drive-ins, and Dives.
+
+## Attributions
+**Design Inspirations**
+- Mobile: https://dribbble.com/shots/9955031-Throttle-app
+- Desktop: https://dribbble.com/shots/3824551-Find-restaurants-near-by
+
+**Repos / Data**
+https://github.com/mcriqui/Diners_DriveIns_and_Dives
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
