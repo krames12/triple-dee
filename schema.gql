@@ -16,8 +16,8 @@ type Restaurant {
   name: String!
   location: [Float!] # [lng, lat]
   description: String
-  rating: Float
-  season: Int!
+  rating: String
+  season: String!
 }
 
 type Query {
