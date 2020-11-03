@@ -11,16 +11,16 @@ const RestaurantList = ({restaurants}) => {
         md:overflow-y-scroll md:overflow-x-auto md:block
       ">
         {restaurants.length && restaurants.map(
-          ({name, rating, placeId}) => (
+          ({name, rating, _id}) => (
             <li 
               className="
                 py-3 px-5 m-2 w-auto
                 bg-white rounded-2xl
               "
-              key={placeId}
+              key={_id}
             >
               <p className="text-left whitespace-no-wrap md:whitespace-normal">{name}</p>
-              <StarRatings key={`${placeId}-${rating}`} rating={rating} />
+              <StarRatings key={`${_id}-${rating}`} rating={rating} />
             </li>
           )
         )}

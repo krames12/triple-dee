@@ -69,7 +69,7 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateR
     }
   }, [restaurantLocations, mapObject])
 
-  const createMapMarker = ({lng, lat}, name) => {
+  const createMapMarker = ([lng, lat], name) => {
     if(mapObject) {
       return new mapboxgl.Marker()
         .setLngLat([lng, lat])

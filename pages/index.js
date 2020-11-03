@@ -17,9 +17,9 @@ export default function Home() {
   const [restaurants, setRestaurants] = useState([])
 
   const updateRestaurantList = async (lng, lat) => {
-    await axios.get(`/api/places?lng=${lng}&lat=${lat}&zoom=${locationData.zoom}`)
+    await axios.get(`/api/db/restaurants`)
       .then( ({data}) => {
-        setRestaurants(data);
+        setRestaurants(data.allRestaurants);
       })
       .catch( error => console.error(error))
   }

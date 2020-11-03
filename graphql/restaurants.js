@@ -16,7 +16,7 @@ export const getAllRestaurants = async (params) => {
     }
   `
 
-  const size = 15
+  const size = 900
   const { data, error } = await fetchHelper(process.env.FAUNA_ENDPOINT, {
     method: 'POST',
     headers: {
