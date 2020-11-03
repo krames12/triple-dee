@@ -20,7 +20,10 @@ const RestaurantList = ({restaurants}) => {
               key={_id}
             >
               <p className="text-left whitespace-no-wrap md:whitespace-normal">{name}</p>
-              <StarRatings key={`${_id}-${rating}`} rating={rating} />
+              {rating !== "Closed" ?
+                <StarRatings key={`${_id}-${rating}`} rating={rating} /> :
+                <p>Closed</p>
+              }
             </li>
           )
         )}
