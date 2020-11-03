@@ -16,6 +16,7 @@ type Restaurant {
   name: String!
   location: [Float!] # [lng, lat]
   description: String
+  ratings: Float
   season: Int!
 }
 
