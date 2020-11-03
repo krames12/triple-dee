@@ -6,6 +6,7 @@ const serverClient = new faunadb.Client({ secret: process.env.FAUNA_SECRET })
 
 
 module.exports = (request, response) => {
+  response.status(200).send("It's already been done, don't you dare try it again");
   const restaurants = restaurantData.default.restaurants.map(
     ({geometry, properties}) => {
       return {
