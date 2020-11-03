@@ -16,18 +16,22 @@ module.exports = (request, response) => {
     }
   )
 
-  serverClient.query(
-    q.Map(restaurants, 
-      q.Lambda(
-        'restaurant_object',
-        q.Create(
-          q.Collection('Restaurant',
-            { data: q.Var('restaurant_object')}
-          )
-        )
+  restaurants.forEach( restaurant => {
+    serverClient.query(
+      q.Create(
+        q.Collection('Restaurant'),
+        { data: {...restaurant} }
       )
     )
-  )
+    .then( ret => {
+      console.log(`Successfully added ${restaurant.name}`)
+      return;
+    })
+    .catch( error => {
+      console.log(error)
+      response.status(500).json(error)
+    })
+  })
 
   response.status(200).json(restaurants)
 }
