@@ -28,31 +28,37 @@ module.exports = async (request, response) => {
     }
   ]
 
-  // serverClient.query(
-  //   q.Create(
-  //     q.Collection('Restaurant'),
-  //     { data: {...testRestaurant} }
-  //   )
-  // )
-  serverClient.query(
-    q.Map(testRestaurants, 
-      q.Lambda(
-        ['restaurant_object'],
-        q.Create(
-          q.Collection('Restaurant',
-            { data: {...q.Var('restaurant_object')},
-            }
-          )
-        )
+  testRestaurants.forEach( restaurant => {
+    serverClient.query(
+      q.Create(
+        q.Collection('Restaurant'),
+        { data: {...restaurant} }
       )
     )
-  )
-  .then( ret => {
-    console.log(ret)
-    response.status(200).json(ret)
+    .then( ret => {
+      console.log(`Successfully added ${restaurant.name}`)
+      return;
+    })
+    .catch( error => {
+      console.log(error)
+      response.status(500).json(error)
+    })
   })
-  .catch( error => {
-    console.log(error)
-    response.status(500).json(error)
-  })
+
+  response.status(200).send("Yup, it worked!")
+  // Sad attempt at using the Lambda to create A LOT OF ENTRIES
+  // serverClient.query(
+  //   q.Map(testRestaurants, 
+  //     q.Lambda(
+  //       'restaurant' ,
+  //       q.Create(
+  //         q.Collection('Restaurant',
+  //           { 
+  //              ...q.Var('restaurant'),
+  //           }
+  //         )
+  //       )
+  //     )
+  //   )
+  // )
 }
