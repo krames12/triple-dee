@@ -12,6 +12,7 @@ module.exports = (request, response) => {
       return {
         name: properties.Name,
         location: geometry.coordinates,
+        rating: properties.Rating,
         season: properties.Season
       }
     }
