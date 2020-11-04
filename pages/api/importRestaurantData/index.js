@@ -6,12 +6,15 @@ const serverClient = new faunadb.Client({ secret: process.env.FAUNA_SECRET })
 
 
 module.exports = (request, response) => {
-  response.status(200).send("It's already been done, don't you dare try it again");
+  // response.status(200).send("It's already been done, don't you dare try it again");
   const restaurants = restaurantData.default.restaurants.map(
     ({geometry, properties}) => {
       return {
         name: properties.Name,
-        location: geometry.coordinates,
+        location: {
+          lng: geometry.coordinates[0],
+          lat: geometry.coordinates[1],
+        },
         rating: properties.Rating,
         season: properties.Season
       }
@@ -22,7 +25,11 @@ module.exports = (request, response) => {
     serverClient.query(
       q.Create(
         q.Collection('Restaurant'),
-        { data: {...restaurant} }
+        { 
+          data: {
+            ...restaurant,
+          } 
+        }
       )
     )
     .then( ret => {

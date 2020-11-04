@@ -7,7 +7,10 @@ export const getAllRestaurants = async (locationBoundaries) => {
         data {
           _id
           name
-          location
+          location {
+            lng
+            lat
+          }
           description
           rating
           season

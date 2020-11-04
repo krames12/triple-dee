@@ -8,23 +8,34 @@ module.exports = async (request, response) => {
   const testRestaurants = [
     {
       name: "Testaurant",
-      location: [-85.5940777, 42.2200136],
-      season: 4
+      location: {
+        lng: -85.5940777, 
+        lat: 42.2200136
+      },
+      season: "4"
     },
     {
       name: "Mestaurant",
-      location: [-85.5940777, 42.2200136],
-      season: 2
+      location: {
+        lng: -85.5940777, 
+        lat: 42.2200136
+      },
+      season: "2"
     },
     {
       name: "Bestaurant",
-      location: [-85.5940777, 42.2200136],
-      season: 3
+      location: {
+        lng: -85.5940777, 
+        lat: 42.2200136
+      },
+      season: "3"
     },
     {
       name: "Testaurant Two Electric Boogaloo",
-      location: [-85.5940777, 42.2200136],
-      season: 15
+      location: {
+        lng: -85.5940777, 
+        lat: 42.2200136},
+      season: "15"
     }
   ]
 
@@ -32,7 +43,11 @@ module.exports = async (request, response) => {
     serverClient.query(
       q.Create(
         q.Collection('Restaurant'),
-        { data: {...restaurant} }
+        { 
+          data: {
+            ...restaurant,
+          } 
+        }
       )
     )
     .then( ret => {

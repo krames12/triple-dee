@@ -3,7 +3,10 @@
 # What should a restaurant look like?
 # Restaurant {
 #   name: "Bilbos Tavern",
-#   location: [ 123.123123, -82.1231231 ],
+#   location: {
+#     lng: 123.123123, 
+#     lat: -82.1231231 
+#   ],
 #   description: "Bacon Ipsum salty grease fat pork steak",
 #   episode: {
 #     number: 11,
@@ -14,10 +17,15 @@
 
 type Restaurant {
   name: String!
-  location: [Float!] # [lng, lat]
+  location: Location! # [lng, lat]
   description: String
   rating: String
   season: String!
+}
+
+type Location @embedded {
+  lng: Float!
+  lat: Float!
 }
 
 type Query {
