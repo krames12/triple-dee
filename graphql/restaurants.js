@@ -1,7 +1,7 @@
 import fetchHelper from "../helpers/fetchHelper";
 
 // get all restaurants
-export const getAllRestaurants = async (params) => {
+export const getAllRestaurants = async (locationBoundaries) => {
   const query = `query GetAllRestaurants($size: Int) {
       allRestaurants(_size: $size) {
         data {

@@ -25,7 +25,7 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateR
             lat: coords.latitude,
           })
 
-          updateRestaurantListHander(coords.longitude, coords.latitude)
+          updateRestaurantListHander(mapbox.getBounds())
         },
 
         // Error
@@ -33,7 +33,7 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateR
       )
 
     } else {
-      updateRestaurantListHander(userLocation.lng, userLocation.lat)
+      updateRestaurantListHander(mapbox.getBounds())
     }
     
     const mapbox = new mapboxgl.Map({
@@ -104,7 +104,7 @@ const Map = ({ userLocation, locationUpdateHandler, restaurantLocations, updateR
             bg-purple-600 text-white hover:bg-purple-800
             transition-all duration-200 ease-in-out
           " 
-          onClick={() => updateRestaurantListHander(userLocation.lng, userLocation.lat)}
+          onClick={() => updateRestaurantListHander(mapObject.getBounds())}
         >
           Refresh List
         </button>

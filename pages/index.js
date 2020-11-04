@@ -12,12 +12,23 @@ export default function Home() {
   const [locationData, setLocationData] = useState({
     lng: -83.0671,
     lat: 42.3529,
-    zoom: 12
+    zoom: 11
   })
   const [restaurants, setRestaurants] = useState([])
 
-  const updateRestaurantList = async (lng, lat) => {
-    await axios.get(`/api/db/restaurants`)
+  const updateRestaurantList = async (mapBounds) => {
+    /*
+      _sw: lng, lat
+      _ne: lng, lat
+      NESW
+
+      Top: _ne.lng
+      Right: _ne.lat
+      South: _sw.lng
+      West: _sw.lat
+    */
+
+    await axios.get(`/api/db/restaurants?north=${mapBounds._ne.lng}&east=${mapBounds._ne.lat}&south=${mapBounds._sw.lng}&west=${mapBounds._sw.lat}`)
       .then( ({data}) => {
         setRestaurants(data.allRestaurants);
       })
